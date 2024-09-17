@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Location:
     title: str
@@ -23,7 +24,7 @@ class World:
             title="Abandoned Research Lab",
             description="Shattered glass tubes and overturned workstations suggest something went wrong here. A strange humming sound emits from a broken containment unit in the corner. A data pad lies on a table, its screen cracked but still operational. You can see a hatch leading upwards through the ceiling, and a bulkhead door to the east. The airlock to the north leads back to the Cryosleep Chamber.",
             exits={"N": "Cryosleep Chamber"},
-        )
+        ),
     ]
 
     @classmethod

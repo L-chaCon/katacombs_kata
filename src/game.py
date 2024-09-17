@@ -1,7 +1,7 @@
 from .world import Location, World
 
 
-class Game():
+class Game:
     location: Location
 
     def __init__(self):
@@ -25,5 +25,5 @@ class Game():
                 return "You can't go there you dummy"
             self.location = World.get_location_by_title(location_title)
             return self.location.print()
-        
+
         raise NotImplemented
