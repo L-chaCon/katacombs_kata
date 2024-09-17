@@ -34,8 +34,49 @@ def test_can_move_to_new_room():
 
 def test_move_to_new_location():
     game = Game()
-    new_location = World.locations[1]
+    new_location = World().locations[1]
     assert (
         game.run_command("GO S")
         == f"{new_location.title}\n\n{new_location.description}"
+    )
+
+
+def test_can_pick_up_item():
+    game = Game()
+    game.run_command("LOOK E")
+    assert game.run_command("TAKE Cryopod Keycard") == "Picked up: Cryopod Keycard"
+
+
+def test_cannot_pick_up_item_that_is_not_there():
+    game = Game()
+    assert game.run_command("TAKE Cryopod Keycard") == "That item isn't here."
+
+
+def test_can_drop_item():
+    game = Game()
+    game.run_command("LOOK E")
+    game.run_command("TAKE Cryopod Keycard")
+    assert game.run_command("DROP Cryopod Keycard") == "Dropped item: Cryopod Keycard"
+
+
+def test_cannot_drop_item_where_another_item_is():
+    game = Game()
+    game.run_command("LOOK E")
+    game.run_command("TAKE Cryopod Keycard")
+    game.run_command("LOOK W")
+    assert (
+        game.run_command("DROP Cryopod Keycard")
+        == "Cannot drop item, another item is here"
+    )
+
+
+def test_can_view_bag_items():
+    game = Game()
+    game.run_command("LOOK E")
+    game.run_command("TAKE Cryopod Keycard")
+    game.run_command("LOOK W")
+    game.run_command("TAKE Emergency Toolkit")
+    assert (
+        game.run_command("BAG")
+        == "The bag contains: Cryopod Keycard, Emergency Toolkit"
     )
