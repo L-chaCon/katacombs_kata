@@ -1,15 +1,19 @@
+from .world import world, Location
+
 class Game():
+    location: Location
+
     def __init__(self):
-        pass
+        self.location = world[0]
 
     def print(self):
-        return '''
-## 1. Cryosleep Chamber
+        return self.location.print()
 
-The metallic chamber is dimly lit, with frost covering the glass of several cryopods. Some are occupied, others flicker with an eerie red light. A control panel by the wall is flashing, signalling a malfunction. An airlock door to the south hums quietly, waiting to be opened.
-
-Items: Cryopod Keycard, Emergency Toolkit
-Objects: Cryopod (can be opened), Control Panel (can be used)
-'''
-        
-
+    def run_command(self, command: str) -> str:
+        cmd = command.split(" ")
+        if cmd[0] == "LOOK":
+            exit = self.location.exits.get(cmd[1])
+            if exit:
+                return f"I can see an exit: {exit}"
+            else:
+                return "Nothing interesting to look at there!"
