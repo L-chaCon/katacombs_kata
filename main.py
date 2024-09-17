@@ -1,5 +1,10 @@
+
+from scr.story import Story
+
+
 def main():
-    pass
+    story = Story(1)
+
 
 if __name__ == "__main__":
     main()
