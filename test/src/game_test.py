@@ -3,7 +3,7 @@ from inspect import cleandoc
 import pytest
 
 from src.game import Game
-from src.world import world
+from src.world import World
 
 
 def test_start_game():
@@ -16,9 +16,11 @@ def test_start_game():
         '''
     )
 
+
 def test_can_look_at_exists():
     game = Game()
     assert game.run_command("LOOK S") == "I can see an exit: Abandoned Research Lab"
+
 
 def test_nothing_to_look_at():
     game = Game()
@@ -30,6 +32,7 @@ def test_can_move_to_new_room():
     assert game.run_command("GO N") == "You can't go there you dummy"
 
 
-# def test_move_to_new_location():
-#     game = Game()
-#     assert game.run_command("GO S") == f"{world[1].title}\n\n{world[1].description}"
+def test_move_to_new_location():
+    game = Game()
+    new_location = World.locations[1]
+    assert game.run_command("GO S") == f"{new_location.title}\n\n{new_location.description}"
